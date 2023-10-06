@@ -106,14 +106,10 @@ def _map_email_to_displayname(address: str) -> str:
     # Figure out which org this email address belongs to
     org_parts = parts[1].split(" ")
 
-    # If this is a ...matrix.org email, mark them as an Admin
-    if org_parts[-2] == "matrix" and org_parts[-1] == "org":
-        org = "Tchap Admin"
-
     # Is this is a ...gouv.fr address, set the org to whatever is before
     # gouv.fr. If there isn't anything (a @gouv.fr email) simply mark their
     # org as "gouv"
-    elif org_parts[-2] == "gouv" and org_parts[-1] == "fr":
+    if org_parts[-2] == "gouv" and org_parts[-1] == "fr":
         org = org_parts[-3] if len(org_parts) > 2 else org_parts[-2]
 
     # Otherwise, mark their org as the email's second-level domain name
